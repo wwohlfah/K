@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ww-ds-nginx
+spec:
+  selector:
+    matchLabels:
+      name: ww-ds-nginx
+  template:
+    metadata:
+      labels:
+        name: ww-ds-nginx
+    spec:
+      containers:
+      - name: ww-ds-nginx
+        image: nginx

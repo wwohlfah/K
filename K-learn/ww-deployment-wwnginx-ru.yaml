@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ww-ru-nginx-deployment
+  labels: 
+    app: ww-ru-nginx
+  annotations: {
+    "kubernetes.io/change-cause" : "revision 6 - to check change log"
+  }
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels: 
+      app: ww-ru-nginx
+  template:
+    metadata:
+      labels: 
+        app: ww-ru-nginx
+    spec:
+      containers:
+      - name: ww-ru-nginx
+        image: nginx:1.20
+        ports:
+        - containerPort: 80
+

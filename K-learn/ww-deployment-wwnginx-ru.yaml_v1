@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ww-ru-nginx-deployment
+  labels:
+    app: ww-ru-nginx
+  annotations: {
+    "kubernetes.io/change-cause" : "revision 5 - to check change log"
+  }
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: ww-ru-nginx
+  template:
+    metadata:
+      labels:
+        app: ww-ru-nginx
+    spec:
+      containers:
+      - name: ww-ru-nginx
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+
